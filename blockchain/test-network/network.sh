@@ -189,15 +189,15 @@ function createOrgs() {
       fatalln "Failed to generate certificates..."
     fi
 
-    infoln "Creating Org5 Identities"
+    # infoln "Creating Org5 Identities"
 
-    set -x
-    cryptogen generate --config=./organizations/cryptogen/crypto-config-org5.yaml --output="organizations"
-    res=$?
-    { set +x; } 2>/dev/null
-    if [ $res -ne 0 ]; then
-      fatalln "Failed to generate certificates..."
-    fi
+    # set -x
+    # cryptogen generate --config=./organizations/cryptogen/crypto-config-org5.yaml --output="organizations"
+    # res=$?
+    # { set +x; } 2>/dev/null
+    # if [ $res -ne 0 ]; then
+    #   fatalln "Failed to generate certificates..."
+    # fi
 
     infoln "Creating Orderer Org Identities"
 
@@ -243,9 +243,9 @@ function createOrgs() {
 
     createOrg4
 
-    infoln "Creating Org5 Identities"
+    # infoln "Creating Org5 Identities"
 
-    createOrg5
+    # createOrg5
 
     infoln "Creating Orderer Org Identities"
 
@@ -382,7 +382,8 @@ function networkDown() {
   # Don't remove the generated artifacts -- note, the ledgers are always removed
   if [ "$MODE" != "restart" ]; then
     # Bring down the network, deleting the volumes
-    ${CONTAINER_CLI} volume rm docker_orderer.example.com docker_peer0.org1.example.com docker_peer0.org2.example.com docker_peer0.org3.example.com docker_peer0.org4.example.com docker_peer0.org5.example.com
+    # ${CONTAINER_CLI} volume rm docker_orderer.example.com docker_peer0.org1.example.com docker_peer0.org2.example.com docker_peer0.org3.example.com docker_peer0.org4.example.com docker_peer0.org5.example.com
+    ${CONTAINER_CLI} volume rm docker_orderer.example.com docker_peer0.org1.example.com docker_peer0.org2.example.com docker_peer0.org3.example.com docker_peer0.org4.example.com 
     #Cleanup the chaincode containers
     clearContainers
     #Cleanup images
@@ -396,7 +397,7 @@ function networkDown() {
     ${CONTAINER_CLI} run --rm -v "$(pwd):/data" busybox sh -c 'cd /data && rm -rf organizations/fabric-ca/org2/msp organizations/fabric-ca/org2/tls-cert.pem organizations/fabric-ca/org2/ca-cert.pem organizations/fabric-ca/org2/IssuerPublicKey organizations/fabric-ca/org2/IssuerRevocationPublicKey organizations/fabric-ca/org2/fabric-ca-server.db'
     ${CONTAINER_CLI} run --rm -v "$(pwd):/data" busybox sh -c 'cd /data && rm -rf organizations/fabric-ca/org3/msp organizations/fabric-ca/org3/tls-cert.pem organizations/fabric-ca/org3/ca-cert.pem organizations/fabric-ca/org3/IssuerPublicKey organizations/fabric-ca/org3/IssuerRevocationPublicKey organizations/fabric-ca/org3/fabric-ca-server.db'
     ${CONTAINER_CLI} run --rm -v "$(pwd):/data" busybox sh -c 'cd /data && rm -rf organizations/fabric-ca/org4/msp organizations/fabric-ca/org4/tls-cert.pem organizations/fabric-ca/org4/ca-cert.pem organizations/fabric-ca/org4/IssuerPublicKey organizations/fabric-ca/org4/IssuerRevocationPublicKey organizations/fabric-ca/org4/fabric-ca-server.db'
-    ${CONTAINER_CLI} run --rm -v "$(pwd):/data" busybox sh -c 'cd /data && rm -rf organizations/fabric-ca/org5/msp organizations/fabric-ca/org5/tls-cert.pem organizations/fabric-ca/org5/ca-cert.pem organizations/fabric-ca/org5/IssuerPublicKey organizations/fabric-ca/org5/IssuerRevocationPublicKey organizations/fabric-ca/org5/fabric-ca-server.db'
+    # ${CONTAINER_CLI} run --rm -v "$(pwd):/data" busybox sh -c 'cd /data && rm -rf organizations/fabric-ca/org5/msp organizations/fabric-ca/org5/tls-cert.pem organizations/fabric-ca/org5/ca-cert.pem organizations/fabric-ca/org5/IssuerPublicKey organizations/fabric-ca/org5/IssuerRevocationPublicKey organizations/fabric-ca/org5/fabric-ca-server.db'
     ${CONTAINER_CLI} run --rm -v "$(pwd):/data" busybox sh -c 'cd /data && rm -rf organizations/fabric-ca/ordererOrg/msp organizations/fabric-ca/ordererOrg/tls-cert.pem organizations/fabric-ca/ordererOrg/ca-cert.pem organizations/fabric-ca/ordererOrg/IssuerPublicKey organizations/fabric-ca/ordererOrg/IssuerRevocationPublicKey organizations/fabric-ca/ordererOrg/fabric-ca-server.db'
     ${CONTAINER_CLI} run --rm -v "$(pwd):/data" busybox sh -c 'cd /data && rm -rf addOrg3/fabric-ca/org3/msp addOrg3/fabric-ca/org3/tls-cert.pem addOrg3/fabric-ca/org3/ca-cert.pem addOrg3/fabric-ca/org3/IssuerPublicKey addOrg3/fabric-ca/org3/IssuerRevocationPublicKey addOrg3/fabric-ca/org3/fabric-ca-server.db'
     # remove channel and script artifacts

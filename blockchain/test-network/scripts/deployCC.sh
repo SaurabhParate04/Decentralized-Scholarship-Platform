@@ -140,8 +140,8 @@ infoln "Install chaincode on peer0.org3..."
 installChaincode 3
 infoln "Install chaincode on peer0.org4..."
 installChaincode 4
-infoln "Install chaincode on peer0.org5..."
-installChaincode 5
+# infoln "Install chaincode on peer0.org5..."
+# installChaincode 5
 
 ## query whether the chaincode is installed
 queryInstalled 1
@@ -170,37 +170,61 @@ approveForMyOrg2 3
 checkCommitReadiness2 2 "\"Org2MSP\": true" "\"Org3MSP\": true"
 checkCommitReadiness2 3 "\"Org2MSP\": true" "\"Org3MSP\": true"
 
-approveForMyOrg3 3
-checkCommitReadiness3 3 "\"Org3MSP\": true" "\"Org4MSP\": false"
-checkCommitReadiness3 4 "\"Org3MSP\": true" "\"Org4MSP\": false"
+approveForMyOrg3 1
+checkCommitReadiness3 1 "\"Org1MSP\": true" "\"Org2MSP\": false" "\"Org4MSP\": false"
+checkCommitReadiness3 2 "\"Org1MSP\": true" "\"Org2MSP\": false" "\"Org4MSP\": false"
+checkCommitReadiness3 4 "\"Org1MSP\": true" "\"Org2MSP\": false" "\"Org4MSP\": false"
+
+approveForMyOrg3 2
+checkCommitReadiness3 1 "\"Org1MSP\": true" "\"Org2MSP\": true" "\"Org4MSP\": false"
+checkCommitReadiness3 2 "\"Org1MSP\": true" "\"Org2MSP\": true" "\"Org4MSP\": false"
+checkCommitReadiness3 4 "\"Org1MSP\": true" "\"Org2MSP\": true" "\"Org4MSP\": false"
 
 approveForMyOrg3 4
-checkCommitReadiness3 3 "\"Org3MSP\": true" "\"Org4MSP\": true"
-checkCommitReadiness3 4 "\"Org3MSP\": true" "\"Org4MSP\": true"
+checkCommitReadiness3 1 "\"Org1MSP\": true" "\"Org2MSP\": true" "\"Org4MSP\": true"
+checkCommitReadiness3 2 "\"Org1MSP\": true" "\"Org2MSP\": true" "\"Org4MSP\": true"
+checkCommitReadiness3 4 "\"Org1MSP\": true" "\"Org2MSP\": true" "\"Org4MSP\": true"
+
+approveForMyOrg4 3
+checkCommitReadiness4 3 "\"Org3MSP\": true" "\"Org2MSP\": false" "\"Org4MSP\": false"
+checkCommitReadiness4 2 "\"Org3MSP\": true" "\"Org2MSP\": false" "\"Org4MSP\": false"
+checkCommitReadiness4 4 "\"Org3MSP\": true" "\"Org2MSP\": false" "\"Org4MSP\": false"
+
+approveForMyOrg4 2
+checkCommitReadiness4 3 "\"Org3MSP\": true" "\"Org2MSP\": true" "\"Org4MSP\": false"
+checkCommitReadiness4 2 "\"Org3MSP\": true" "\"Org2MSP\": true" "\"Org4MSP\": false"
+checkCommitReadiness4 4 "\"Org3MSP\": true" "\"Org2MSP\": true" "\"Org4MSP\": false"
 
 approveForMyOrg4 4
-checkCommitReadiness4 4 "\"Org4MSP\": true" "\"Org5MSP\": false"
-checkCommitReadiness4 5 "\"Org4MSP\": true" "\"Org5MSP\": false"
+checkCommitReadiness4 3 "\"Org3MSP\": true" "\"Org2MSP\": true" "\"Org4MSP\": true"
+checkCommitReadiness4 2 "\"Org3MSP\": true" "\"Org2MSP\": true" "\"Org4MSP\": true"
+checkCommitReadiness4 4 "\"Org3MSP\": true" "\"Org2MSP\": true" "\"Org4MSP\": true"
 
-approveForMyOrg4 5
-checkCommitReadiness4 4 "\"Org4MSP\": true" "\"Org5MSP\": true"
-checkCommitReadiness4 5 "\"Org4MSP\": true" "\"Org5MSP\": true"
+# approveForMyOrg4 4
+# checkCommitReadiness4 4 "\"Org4MSP\": true" "\"Org5MSP\": false"
+# checkCommitReadiness4 5 "\"Org4MSP\": true" "\"Org5MSP\": false"
+
+# approveForMyOrg4 5
+# checkCommitReadiness4 4 "\"Org4MSP\": true" "\"Org5MSP\": true"
+# checkCommitReadiness4 5 "\"Org4MSP\": true" "\"Org5MSP\": true"
 
 ## now that we know for sure both orgs have approved, commit the definition
 commitChaincodeDefinition 1 2
 commitChaincodeDefinition2 2 3
-commitChaincodeDefinition3 3 4
-commitChaincodeDefinition4 4 5
+commitChaincodeDefinition3 1 2 4
+commitChaincodeDefinition4 3 2 4
 
 ## query on both orgs to see that the definition committed successfully
 queryCommitted 1
 queryCommitted 2
 queryCommitted2 2
 queryCommitted2 3
-queryCommitted3 3
+queryCommitted3 1
+queryCommitted3 2
 queryCommitted3 4
+queryCommitted4 3
+queryCommitted4 2
 queryCommitted4 4
-queryCommitted4 5
 
 ## Invoke the chaincode - this does require that the chaincode have the 'initLedger'
 ## method defined
@@ -209,8 +233,8 @@ if [ "$CC_INIT_FCN" = "NA" ]; then
 else
   chaincodeInvokeInit 1 2
   chaincodeInvokeInit2 2 3
-  chaincodeInvokeInit3 3 4
-  chaincodeInvokeInit4 4 5
+  chaincodeInvokeInit3 1 2 4
+  chaincodeInvokeInit4 3 2 4
 fi
 
 exit 0

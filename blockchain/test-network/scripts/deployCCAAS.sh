@@ -159,11 +159,11 @@ startDockerContainer() {
                   -e CHAINCODE_SERVER_ADDRESS=0.0.0.0:${CCAAS_SERVER_PORT} \
                   -e CHAINCODE_ID=$PACKAGE_ID -e CORE_CHAINCODE_ID_NAME=$PACKAGE_ID \
                     ${CC_NAME}_ccaas_image:latest
-    ${CONTAINER_CLI} run  --rm -d --name peer0org5_${CC_NAME}_ccaas \
-                  --network fabric_test \
-                  -e CHAINCODE_SERVER_ADDRESS=0.0.0.0:${CCAAS_SERVER_PORT} \
-                  -e CHAINCODE_ID=$PACKAGE_ID -e CORE_CHAINCODE_ID_NAME=$PACKAGE_ID \
-                    ${CC_NAME}_ccaas_image:latest
+    # ${CONTAINER_CLI} run  --rm -d --name peer0org5_${CC_NAME}_ccaas \
+    #               --network fabric_test \
+    #               -e CHAINCODE_SERVER_ADDRESS=0.0.0.0:${CCAAS_SERVER_PORT} \
+    #               -e CHAINCODE_ID=$PACKAGE_ID -e CORE_CHAINCODE_ID_NAME=$PACKAGE_ID \
+    #                 ${CC_NAME}_ccaas_image:latest
     res=$?
     { set +x; } 2>/dev/null
     cat log.txt
@@ -192,11 +192,11 @@ startDockerContainer() {
                   -e CHAINCODE_SERVER_ADDRESS=0.0.0.0:${CCAAS_SERVER_PORT} \
                   -e CHAINCODE_ID=$PACKAGE_ID -e CORE_CHAINCODE_ID_NAME=$PACKAGE_ID \
                     ${CC_NAME}_ccaas_image:latest"
-    infoln "    ${CONTAINER_CLI} run --rm -d --name peer0org5_${CC_NAME}_ccaas  \
-                  --network fabric_test \
-                  -e CHAINCODE_SERVER_ADDRESS=0.0.0.0:${CCAAS_SERVER_PORT} \
-                  -e CHAINCODE_ID=$PACKAGE_ID -e CORE_CHAINCODE_ID_NAME=$PACKAGE_ID \
-                    ${CC_NAME}_ccaas_image:latest"
+    # infoln "    ${CONTAINER_CLI} run --rm -d --name peer0org5_${CC_NAME}_ccaas  \
+    #               --network fabric_test \
+    #               -e CHAINCODE_SERVER_ADDRESS=0.0.0.0:${CCAAS_SERVER_PORT} \
+    #               -e CHAINCODE_ID=$PACKAGE_ID -e CORE_CHAINCODE_ID_NAME=$PACKAGE_ID \
+    #                 ${CC_NAME}_ccaas_image:latest"
   fi
 }
 
@@ -215,8 +215,8 @@ infoln "Install chaincode on peer0.org3..."
 installChaincode 3
 infoln "Install chaincode on peer0.org4..."
 installChaincode 4
-infoln "Install chaincode on peer0.org5..."
-installChaincode 5
+# infoln "Install chaincode on peer0.org5..."
+# installChaincode 5
 
 ## query whether the chaincode is installed
 queryInstalled 1
@@ -253,13 +253,13 @@ approveForMyOrg3 4
 checkCommitReadiness3 3 "\"Org3MSP\": true" "\"Org4MSP\": true"
 checkCommitReadiness3 4 "\"Org3MSP\": true" "\"Org4MSP\": true"
 
-approveForMyOrg4 4
-checkCommitReadiness4 4 "\"Org4MSP\": true" "\"Org5MSP\": false"
-checkCommitReadiness4 5 "\"Org4MSP\": true" "\"Org5MSP\": false"
+# approveForMyOrg4 4
+# checkCommitReadiness4 4 "\"Org4MSP\": true" "\"Org5MSP\": false"
+# checkCommitReadiness4 5 "\"Org4MSP\": true" "\"Org5MSP\": false"
 
-approveForMyOrg4 5
-checkCommitReadiness4 4 "\"Org4MSP\": true" "\"Org5MSP\": true"
-checkCommitReadiness4 5 "\"Org4MSP\": true" "\"Org5MSP\": true"
+# approveForMyOrg4 5
+# checkCommitReadiness4 4 "\"Org4MSP\": true" "\"Org5MSP\": true"
+# checkCommitReadiness4 5 "\"Org4MSP\": true" "\"Org5MSP\": true"
 
 ## now that we know for sure both orgs have approved, commit the definition
 commitChaincodeDefinition 1 2

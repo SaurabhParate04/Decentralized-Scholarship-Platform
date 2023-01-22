@@ -41,11 +41,11 @@ createChannelGenesisBlock() {
 	res=$?
 	{ set +x; } 2>/dev/null
 	set -x
-	configtxgen -profile TwoOrgsApplicationGenesis3 -outputBlock ./channel-artifacts/${CHANNEL3_NAME}.block -channelID $CHANNEL3_NAME
+	configtxgen -profile ThreeOrgsApplicationGenesis1 -outputBlock ./channel-artifacts/${CHANNEL3_NAME}.block -channelID $CHANNEL3_NAME
 	res=$?
 	{ set +x; } 2>/dev/null
 	set -x
-	configtxgen -profile TwoOrgsApplicationGenesis4 -outputBlock ./channel-artifacts/${CHANNEL4_NAME}.block -channelID $CHANNEL4_NAME
+	configtxgen -profile ThreeOrgsApplicationGenesis2 -outputBlock ./channel-artifacts/${CHANNEL4_NAME}.block -channelID $CHANNEL4_NAME
 	res=$?
 	{ set +x; } 2>/dev/null
   verifyResult $res "Failed to generate channel configuration transaction..."
@@ -257,16 +257,26 @@ infoln "Joining org3 peer to the channel..."
 joinChannel2 3
 
 ## Join all the peers to the channel
-infoln "Joining org3 peer to the channel..."
-joinChannel3 3
+infoln "Joining org1 peer to the channel..."
+joinChannel3 1
+infoln "Joining org2 peer to the channel..."
+joinChannel3 2
 infoln "Joining org4 peer to the channel..."
 joinChannel3 4
 
 ## Join all the peers to the channel
+infoln "Joining org3 peer to the channel..."
+joinChannel4 3
+infoln "Joining org2 peer to the channel..."
+joinChannel4 2
 infoln "Joining org4 peer to the channel..."
 joinChannel4 4
-infoln "Joining org5 peer to the channel..."
-joinChannel4 5
+
+# ## Join all the peers to the channel
+# infoln "Joining org4 peer to the channel..."
+# joinChannel4 4
+# infoln "Joining org5 peer to the channel..."
+# joinChannel4 5
 
 ## Set the anchor peers for each org in the channel
 infoln "Setting anchor peer for org1..."
@@ -281,16 +291,25 @@ infoln "Setting anchor peer for org3..."
 setAnchorPeer2 3
 
 ## Set the anchor peers for each org in the channel
-infoln "Setting anchor peer for org3..."
-setAnchorPeer3 3
+infoln "Setting anchor peer for org1..."
+setAnchorPeer3 1
+infoln "Setting anchor peer for org2..."
+setAnchorPeer3 2
 infoln "Setting anchor peer for org4..."
 setAnchorPeer3 4
 
 ## Set the anchor peers for each org in the channel
+infoln "Setting anchor peer for org3..."
+setAnchorPeer4 3
+infoln "Setting anchor peer for org2..."
+setAnchorPeer4 2
 infoln "Setting anchor peer for org4..."
 setAnchorPeer4 4
-infoln "Setting anchor peer for org5..."
-setAnchorPeer4 5
+
+## Set the anchor peers for each org in the channel
+# infoln "Setting anchor peer for org4..."
+# setAnchorPeer4 4
+# infoln "Setting anchor peer for org5..."
+# setAnchorPeer4 5
 
 successln "Channels '$CHANNEL_NAME and '$CHANNEL2_NAME' and '$CHANNEL3_NAME' and '$CHANNEL4_NAME' joined"
- 
