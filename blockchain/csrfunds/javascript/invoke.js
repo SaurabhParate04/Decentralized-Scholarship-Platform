@@ -72,6 +72,7 @@ async function main() {
 
         // Get the contract from the network.
         const contract = network.getContract('csrfunds');
+        // const contract2 = network.getContract('scholarships');
 
         // Submit the specified transaction.
         if(func === 'createTransaction') {

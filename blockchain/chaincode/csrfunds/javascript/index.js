@@ -7,6 +7,8 @@
 'use strict';
 
 const CSRFunds = require('./lib/csrfunds');
+const Scholarships = require('./lib/scholarships');
 
 module.exports.CSRFunds = CSRFunds;
-module.exports.contracts = [ CSRFunds ];
+module.exports.Scholarships = Scholarships;
+module.exports.contracts = [ CSRFunds, Scholarships ];
