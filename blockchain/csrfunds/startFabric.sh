@@ -34,6 +34,7 @@ pushd ../test-network
 ./network.sh down
 ./network.sh up createChannel -ca -s couchdb
 ./network.sh deployCC -ccn csrfunds -ccv 1 -cci initLedger -ccl ${CC_SRC_LANGUAGE} -ccp ${CC_SRC_PATH}
+./network.sh deployCC -ccn scholarships -ccv 1 -cci initLedger -ccl ${CC_SRC_LANGUAGE} -ccp ${CC_SRC_PATH}
 popd
 
 cat <<EOF
