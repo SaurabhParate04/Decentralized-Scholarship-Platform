@@ -16,12 +16,13 @@ const argv = yargs(hideBin(process.argv)).argv;
 console.log(argv);
 
 // let args = process.argv.slice(2);
-const func = argv._[argv._.length - 3];
-const productId = argv._[argv._.length - 2];
-const user = argv._[argv._.length - 1];
+const func = argv._[argv._.length - 4];
+const productId = argv._[argv._.length - 3];
+const user = argv._[argv._.length - 2];
 const obj = argv.obj;
-const usertype = argv._[argv._.length - 5];
-const channel = argv._[argv._.length - 4];
+const usertype = argv._[argv._.length - 6];
+const channel = argv._[argv._.length - 5];
+const cc = argv._[argv._.length - 1];
 
 console.log(func, productId, user, usertype);
 
@@ -71,12 +72,27 @@ async function main() {
         const network = await gateway.getNetwork(`${channel}`);
 
         // Get the contract from the network.
-        const contract = network.getContract('csrfunds');
-        // const contract2 = network.getContract('scholarships');
+        const contract1 = network.getContract('csrfunds');
+        const contract2 = network.getContract('scholarships');
+
+        const contract = (cc === 'csrfunds')? contract1: contract2;
 
         // Submit the specified transaction.
         if(func === 'createTransaction') {
-            await contract.submitTransaction(func, productId, JSON.stringify(obj));
+            if(cc === 'scholarships') {
+                const querybal = await contract1.submitTransaction('queryTransaction', 'Transaction0');
+                const queryobj = JSON.parse(querybal.toString('utf8'));
+                const balance = queryobj.amount;
+                if(balance >= obj.amount) {
+                    console.log('Transferring Funds');
+                    await contract2.submitTransaction(func, productId, JSON.stringify(obj));
+                    await contract1.submitTransaction('updateFunds', obj.amount);
+                } else {
+                    console.log('Insufficient Funds');
+                }
+            } else {
+                await contract1.submitTransaction(func, productId, JSON.stringify(obj));
+            }
             console.log('Transaction has been submitted');
         } else if(func === 'queryAllTransactions') {
             await contract.submitTransaction(func);

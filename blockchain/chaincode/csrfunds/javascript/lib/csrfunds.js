@@ -19,10 +19,10 @@ class CSRFunds extends Contract {
             },
         ];
 
-        const now = String(new Date());
+        // const now = String(new Date());
         // await ctx.stub.putState('Total Funds', Buffer.from(JSON.stringify({amount: 0, timestamp: now})));
         for (let i = 0; i < transactions.length; i++) {
-            transactions[i].timestamp = now;
+            transactions[i].timestamp = 'DDMMYY';
             transactions[i].cause = 'Education';
             if(i !== 0) transactions[i].docType = 'transaction';
             await ctx.stub.putState('Transaction' + i, Buffer.from(JSON.stringify(transactions[i])));
@@ -88,6 +88,19 @@ class CSRFunds extends Contract {
         }
         console.info(allResults);
         return JSON.stringify(allResults);
+    }
+
+    async updateFunds(ctx, amt) {
+        console.info('============= START : updateFunds ===========');
+        const transactionAsBytes = await ctx.stub.getState('Transaction0'); // get the transaction from chaincode state
+        if (!transactionAsBytes || transactionAsBytes.length === 0) {
+            throw new Error(`Total Funds does not exist`);
+        }
+        const tr = JSON.parse(transactionAsBytes.toString());
+        tr.amount = tr.amount - amt;
+
+        await ctx.stub.putState('Transaction0', Buffer.from(JSON.stringify(tr)));
+        console.info('============= END : updateFunds ===========');
     }
 
     // async changeTransactionOwner(ctx, transactionId, newOwner) {

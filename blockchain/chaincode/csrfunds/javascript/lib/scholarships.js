@@ -14,18 +14,17 @@ class Scholarships extends Contract {
         console.info('============= START : Initialize Ledger ===========');
         const transactions = [
             {
-                id: '0',
-                amount: 0,
+                id: 'Initializing',
             },
         ];
 
-        const now = String(new Date());
+        // const now = String(new Date());
         // await ctx.stub.putState('Total Funds', Buffer.from(JSON.stringify({amount: 0, timestamp: now})));
         for (let i = 0; i < transactions.length; i++) {
-            transactions[i].timestamp = now;
+            transactions[i].timestamp = 'DDMMYYYY';
             transactions[i].cause = 'Education';
             if(i !== 0) transactions[i].docType = 'transaction';
-            await ctx.stub.putState('Transaction' + i, Buffer.from(JSON.stringify(transactions[i])));
+            await ctx.stub.putState('TRN' + i, Buffer.from(JSON.stringify(transactions[i])));
             console.info('Added <--> ', transactions[i]);
         }
         console.info('============= END : Initialize Ledger ===========');
