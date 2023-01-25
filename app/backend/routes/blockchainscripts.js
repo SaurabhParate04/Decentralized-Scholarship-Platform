@@ -35,7 +35,7 @@ router.get('/registeruser', async(req, res) => {
 router.get('/invoke', async(req, res) => {
     try {
         console.log('from invoke api')
-        cmd.run(`wsl -e sh -c "cd \"./blockchain/spices/javascript\" && node invoke.js ${req.header('obj')} ${req.header('usertype')} ${req.header('channel')} ${req.header('func')} ${req.header('prodId')} ${req.header('user')}"`, function(err, data, stderr) {
+        cmd.run(`wsl -e sh -c "cd \"./blockchain/spices/javascript\" && node invoke.js ${req.header('obj')} ${req.header('usertype')} ${req.header('channel')} ${req.header('func')} ${req.header('transactionId')} ${req.header('user')} ${req.header('cc')}"`, function(err, data, stderr) {
             console.log(data)
             if(err) {
                 console.log(err)
@@ -49,7 +49,7 @@ router.get('/invoke', async(req, res) => {
 router.get('/query', async(req, res) => {
     try {
         console.log('from query api')
-        cmd.run(`wsl -e sh -c "cd \"./blockchain/spices/javascript\" && node query.js ${req.header('user')} ${req.header('usertype')} ${req.header('channel')} ${req.header('prodId')}"`, function(err, data, stderr) {
+        cmd.run(`wsl -e sh -c "cd \"./blockchain/spices/javascript\" && node query.js ${req.header('user')} ${req.header('usertype')} ${req.header('channel')} ${req.header('transactionId')}"`, function(err, data, stderr) {
             res.json(data)
             if(err) {
                 console.log(err)

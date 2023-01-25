@@ -1,25 +1,37 @@
-import logo from './logo.svg';
+import React, { useEffect } from 'react';
 import './App.css';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  useLocation
+} from "react-router-dom";
+import Invokecsr from './pages/Invokecsr';
+
 
 function App() {
+  const useScrollToTop = () => {
+    const location = useLocation();
+    useEffect(() => {
+      window.scrollTo({ top: 0 });
+      // scroll to the top of the browser window when changing route
+      // the window object is a normal DOM object and is safe to use in React.
+    }, [location]);
+  };
+
+  //console.log(account);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <Router >
+			<Switch>
+				<Route exact path="/invokecsr">
+					<Invokecsr useScrollToTop={useScrollToTop} />
+				</Route>
+			</Switch>
+        </Router>
     </div>
   );
 }
 
 export default App;
+
