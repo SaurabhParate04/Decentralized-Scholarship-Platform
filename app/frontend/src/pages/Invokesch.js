@@ -12,8 +12,8 @@ export default function Invokesch() {
         user: '',
     })
 
-	const [func, setFunc] = useState('')
-    const [channel, setChannel] = useState('')
+	const [func, setFunc] = useState('createTransaction')
+    const [channel, setChannel] = useState('channel3')
 
     const onChangeArgs = async (e) => {
         setArgs({
@@ -70,23 +70,6 @@ export default function Invokesch() {
 					<div className="cf-content">
 						<form onSubmit={onSubmitArgs} onChange={onChangeArgs}>
 							<div className="user-details">
-								<div className="input-box" style={{ width: "100%" }}>
-									<span className="details">Amount</span>
-									<input type="number" name="amount" placeholder="Enter the amount" required />
-								</div>
-                                <div className="input-box" style={{ width: "100%" }}>
-									<span className="details">Username</span>
-									<input type="text" name="username" placeholder="Enter Username" required />
-								</div>
-                                <div className="input-box" style={{ width: "100%" }}>
-									<span className="details">Channel</span>
-									<div className="select">
-										<select className="form-select select-box select-wrapper" name="channel" onChange={channelHandler} required>
-                                            <option value="channel3">Channel 3</option>
-                                            <option value="channel4">Channel 4</option>
-										</select>
-									</div>
-								</div>
                                 <div className="input-box" style={{ width: "100%" }}>
 									<span className="details">Function</span>
 									<div className="select">
@@ -97,6 +80,35 @@ export default function Invokesch() {
 										</select>
 									</div>
 								</div>
+								{
+                                func === 'createTransaction' && <div className="input-box" style={{ width: "100%" }}>
+									<span className="details">Amount</span>
+									<input type="number" name="amount" placeholder="Enter the amount" required />
+								</div>
+                                }
+                                {
+                                func === 'createTransaction' && <div className="input-box" style={{ width: "100%" }}>
+									<span className="details">Username</span>
+									<input type="text" name="username" placeholder="Enter Username" required />
+								</div>
+                                }
+                                {
+                                func === 'createTransaction' && <div className="input-box" style={{ width: "100%" }}>
+									<span className="details">Channel</span>
+									<div className="select">
+										<select className="form-select select-box select-wrapper" name="channel" onChange={channelHandler} required>
+                                            <option value="channel3">Channel 3</option>
+                                            <option value="channel4">Channel 4</option>
+										</select>
+									</div>
+								</div>
+                                }
+                                {
+                                func === 'queryTransaction' && <div className="input-box" style={{ width: "100%" }}>
+									<span className="details">Username</span>
+									<input type="text" name="transactionid" placeholder="Enter TransactionId" required />
+								</div>
+                                }
 							</div>
 							<div className="button">
 								<input type="submit"/>

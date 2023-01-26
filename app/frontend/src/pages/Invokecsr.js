@@ -13,9 +13,9 @@ export default function Invokecsr() {
         user: '',
     })
 
-	const [func, setFunc] = useState('')
-    const [usertype, setUsertype] = useState('')
-    const [channel, setChannel] = useState('')
+	const [func, setFunc] = useState('createTransaction')
+    const [usertype, setUsertype] = useState('Company1')
+    const [channel, setChannel] = useState('mychannel')
 
     const onChangeArgs = async (e) => {
         setArgs({
@@ -76,40 +76,6 @@ export default function Invokecsr() {
 					<div className="cf-content">
 						<form onSubmit={onSubmitArgs} onChange={onChangeArgs}>
 							<div className="user-details">
-								<div className="input-box" style={{ width: "100%" }}>
-									<span className="details">Company Name</span>
-									<input type="text" name="companyName" placeholder="Enter Company Name" required />
-								</div>
-								<div className="input-box" style={{ width: "100%" }}>
-									<span className="details">Company Address</span>
-									<input type="text" name="companyAddress" placeholder="Enter Company Address" required />
-								</div>
-								<div className="input-box" style={{ width: "100%" }}>
-									<span className="details">Amount</span>
-									<input type="number" name="amount" placeholder="Enter the amount" required />
-								</div>
-                                <div className="input-box" style={{ width: "100%" }}>
-									<span className="details">Username</span>
-									<input type="text" name="username" placeholder="Enter Username" required />
-								</div>
-                                <div className="input-box" style={{ width: "100%" }}>
-									<span className="details">Usertype</span>
-									<div className="select">
-										<select className="form-select select-box select-wrapper" name="usertype" onChange={usertypeHandler} required>
-											<option value="Company1">Company 1</option>
-											<option value="Company2">Company 2</option>
-										</select>
-									</div>
-								</div>
-                                <div className="input-box" style={{ width: "100%" }}>
-									<span className="details">Channel</span>
-									<div className="select">
-										<select className="form-select select-box select-wrapper" name="channel" onChange={channelHandler} required>
-											<option value="mychannel">Channel 1</option>
-											<option value="channel2">Channel 2</option>
-										</select>
-									</div>
-								</div>
                                 <div className="input-box" style={{ width: "100%" }}>
 									<span className="details">Function</span>
 									<div className="select">
@@ -120,6 +86,58 @@ export default function Invokecsr() {
 										</select>
 									</div>
 								</div>
+								{
+                                func === 'createTransaction' && <div className="input-box" style={{ width: "100%" }}>
+									<span className="details">Company Name</span>
+									<input type="text" name="companyName" placeholder="Enter Company Name" required />
+								</div>
+                                }
+								{
+                                func === 'createTransaction' && <div className="input-box" style={{ width: "100%" }}>
+									<span className="details">Company Address</span>
+									<input type="text" name="companyAddress" placeholder="Enter Company Address" required />
+								</div>
+                                }
+								{
+                                func === 'createTransaction' && <div className="input-box" style={{ width: "100%" }}>
+									<span className="details">Amount</span>
+									<input type="number" name="amount" placeholder="Enter the amount" required />
+								</div>
+                                }
+                                {
+                                func === 'createTransaction' && <div className="input-box" style={{ width: "100%" }}>
+									<span className="details">Username</span>
+									<input type="text" name="username" placeholder="Enter Username" required />
+								</div>
+                                }
+                                {
+                                func === 'createTransaction' && <div className="input-box" style={{ width: "100%" }}>
+									<span className="details">Usertype</span>
+									<div className="select">
+										<select className="form-select select-box select-wrapper" name="usertype" onChange={usertypeHandler} required>
+											<option value="Company1">Company 1</option>
+											<option value="Company2">Company 2</option>
+										</select>
+									</div>
+								</div>
+                                }
+                                {
+                                func === 'createTransaction' && <div className="input-box" style={{ width: "100%" }}>
+									<span className="details">Channel</span>
+									<div className="select">
+										<select className="form-select select-box select-wrapper" name="channel" onChange={channelHandler} required>
+											<option value="mychannel">Channel 1</option>
+											<option value="channel2">Channel 2</option>
+										</select>
+									</div>
+								</div>
+                                }
+                                {
+                                func === 'queryTransaction' && <div className="input-box" style={{ width: "100%" }}>
+									<span className="details">Username</span>
+									<input type="text" name="transactionid" placeholder="Enter TransactionId" required />
+								</div>
+                                }
 							</div>
 							<div className="button">
 								<input type="submit"/>
