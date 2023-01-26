@@ -7,6 +7,7 @@ import {
   useLocation
 } from "react-router-dom";
 import Invokecsr from './pages/Invokecsr';
+import Invokesch from './pages/Invokesch';
 
 
 function App() {
@@ -26,6 +27,9 @@ function App() {
 			<Switch>
 				<Route exact path="/invokecsr">
 					<Invokecsr useScrollToTop={useScrollToTop} />
+				</Route>
+        <Route exact path="/invokecsr">
+					<Invokesch useScrollToTop={useScrollToTop} />
 				</Route>
 			</Switch>
         </Router>

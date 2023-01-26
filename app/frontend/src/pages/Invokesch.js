@@ -1,20 +1,18 @@
 import React, { useEffect, useState } from 'react'
 
-export default function Invokecsr() {
+export default function Invokesch() {
 
     useEffect(() => {
         window.scrollTo({ top: 0 })
     }, [])
 
     const [args, setArgs] = useState({
-        company: '',
-        address: '',
+        studentId: '',
         amount: '',
         user: '',
     })
 
 	const [func, setFunc] = useState('')
-    const [usertype, setUsertype] = useState('')
     const [channel, setChannel] = useState('')
 
     const onChangeArgs = async (e) => {
@@ -28,7 +26,7 @@ export default function Invokecsr() {
         try {
             const now = String(new Date())
             const transactionId = 'TRNSCTC' + now.substring(8,10) + now.substring(11,15) + now.substring(16,18) + now.substring(19,21) + now.substring(22,24)
-            const obj = `--obj.transactionId=${transactionId} --obj.company=${(args.company).replace(/ /g,"_")} --obj.address=${(args.address).replace(/ /g,"_")} --obj.amount=${args.amount} --obj.timestamp='"${now.replace(/ /g,"_")}"'`
+            const obj = `--obj.transactionId=${transactionId} --obj.studentId=${args.studentId} --obj.amount=${args.amount} --obj.timestamp='"${now.replace(/ /g,"_")}"'`
             invoke(transactionId, obj)
         } catch (error) {
             console.error(error.message)
@@ -47,7 +45,7 @@ export default function Invokecsr() {
                     'func': func,
                     'transactionId': transactionId,
                     'obj': obj,
-                    'usertype': usertype,
+                    'usertype': 'Portal',
                     'channel': channel,
                 }
             });
@@ -58,10 +56,6 @@ export default function Invokecsr() {
 
 	const functionHandler = (e) => {
         setFunc(e.target.value)
-    }
-
-    const usertypeHandler = (e) => {
-        setUsertype(e.target.value)
     }
 
     const channelHandler = (e) => {
@@ -77,14 +71,6 @@ export default function Invokecsr() {
 						<form onSubmit={onSubmitArgs} onChange={onChangeArgs}>
 							<div className="user-details">
 								<div className="input-box" style={{ width: "100%" }}>
-									<span className="details">Company Name</span>
-									<input type="text" name="companyName" placeholder="Enter Company Name" required />
-								</div>
-								<div className="input-box" style={{ width: "100%" }}>
-									<span className="details">Company Address</span>
-									<input type="text" name="companyAddress" placeholder="Enter Company Address" required />
-								</div>
-								<div className="input-box" style={{ width: "100%" }}>
 									<span className="details">Amount</span>
 									<input type="number" name="amount" placeholder="Enter the amount" required />
 								</div>
@@ -93,20 +79,11 @@ export default function Invokecsr() {
 									<input type="text" name="username" placeholder="Enter Username" required />
 								</div>
                                 <div className="input-box" style={{ width: "100%" }}>
-									<span className="details">Usertype</span>
-									<div className="select">
-										<select className="form-select select-box select-wrapper" name="usertype" onChange={usertypeHandler} required>
-											<option value="Company1">Company 1</option>
-											<option value="Company2">Company 2</option>
-										</select>
-									</div>
-								</div>
-                                <div className="input-box" style={{ width: "100%" }}>
 									<span className="details">Channel</span>
 									<div className="select">
 										<select className="form-select select-box select-wrapper" name="channel" onChange={channelHandler} required>
-											<option value="mychannel">Channel 1</option>
-											<option value="channel2">Channel 2</option>
+                                            <option value="channel3">Channel 3</option>
+                                            <option value="channel4">Channel 4</option>
 										</select>
 									</div>
 								</div>
