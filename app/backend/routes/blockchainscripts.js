@@ -46,18 +46,4 @@ router.get('/invoke', async(req, res) => {
     }
 })
 
-router.get('/query', async(req, res) => {
-    try {
-        console.log('from query api')
-        cmd.run(`wsl -e sh -c "cd \"./blockchain/spices/javascript\" && node query.js ${req.header('user')} ${req.header('usertype')} ${req.header('channel')} ${req.header('transactionId')}"`, function(err, data, stderr) {
-            res.json(data)
-            if(err) {
-                console.log(err)
-            }
-        })
-    } catch(error) {
-        console.log(error);
-    }
-})
-
 module.exports = router
