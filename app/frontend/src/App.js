@@ -8,6 +8,8 @@ import {
 } from "react-router-dom";
 import Invokecsr from './pages/Invokecsr';
 import Invokesch from './pages/Invokesch';
+import Enroll from './pages/Enroll';
+import Register from './pages/Register';
 
 
 function App() {
@@ -28,8 +30,14 @@ function App() {
 				<Route exact path="/invokecsr">
 					<Invokecsr useScrollToTop={useScrollToTop} />
 				</Route>
-        <Route exact path="/invokecsr">
+        <Route exact path="/invokesch">
 					<Invokesch useScrollToTop={useScrollToTop} />
+				</Route>
+        <Route exact path="/enroll">
+					<Enroll useScrollToTop={useScrollToTop} />
+				</Route>
+        <Route exact path="/register">
+					<Register useScrollToTop={useScrollToTop} />
 				</Route>
 			</Switch>
         </Router>
